@@ -18,6 +18,9 @@ const config = {
 // Create a MySQL pool
 const pool = mysql.createPool(config);
 
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
 
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
@@ -27,6 +30,10 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname+'/reindex.html'));
+});
+
+app.get('/hash', (request, response) => {
+    response.sendFile(path.join(__dirname+'/search.html'));
 });
 
 app.use(express.static(path.join(__dirname, 'statics')));
@@ -49,6 +56,18 @@ app.post('/users', (request, response) => {
     });
     response.sendFile(path.join(__dirname+'/res.html'));
     
+});
+
+app.get('/search',function(req,res){
+	pool.query('SELECT emailId from userData where emailId like "%'+req.query.key+'%"', function(err, rows, fields) {
+		  if (err) throw err;
+	    var data=[];
+	    for(i=0;i<rows.length;i++)
+	      {
+	        data.push(rows[i].first_name);
+	      }
+	      res.end(JSON.stringify(data));
+		});
 });
 
 
