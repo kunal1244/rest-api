@@ -49,37 +49,34 @@ app.get('/users', (request, response) => {
 
 // Add a new user
 app.post('/users', (request, response) => {
-    pool.query("Insert into userData (userName,password,emailId,phoneNo) VALUES ('"+request.body.name+"','"+request.body.pwd+"','"+request.body.email+"','"+request.body.contact+"')",function(err, result)      
-    {                                                      
-      if (err)
-         throw err;
-    });
-    response.sendFile(path.join(__dirname+'/res.html'));
+    pool.query('SELECT * from userData where emailId like "%'+request.body.email+'%"', function(err, rows, fields) {
+    	if (rows.length==0){
+		    pool.query("Insert ignore into userData (userName,password,emailId,phoneNo) VALUES ('"+request.body.name+"','"+request.body.pwd+"','"+request.body.email+"','"+request.body.contact+"')",function(err, result)      
+		    {                                                      
+		      if (err)
+		         throw err;
+		    });
+		    response.sendFile(path.join(__dirname+'/res.html'));
+		}
+		else{
+			response.sendFile(path.join(__dirname+'/test.html'));
+		}
+	});
     
 });
 
 app.get('/search',function(req,res){
-	pool.query('SELECT emailId from userData where emailId like "%'+req.query.key+'%"', function(err, rows, fields) {
+	pool.query('SELECT * from userData where emailId like "%'+req.query.key+'%"', function(err, rows, fields) {
 		  if (err) throw err;
 	    var data=[];
 	    for(i=0;i<rows.length;i++)
 	      {
-	        data.push(rows[i].first_name);
+	        data.push(rows[i].emailId, rows[i].userName, rows[i].phoneNo);
 	      }
-	      res.end(JSON.stringify(data));
+	      res.send(JSON.stringify(data));
 		});
 });
 
-
-// Delete a user
-app.delete('/users/:id', (request, response) => {
-    pool.query("Insert into userData (userName,password,emailId,phoneNo) VALUES ('"+request.body.name+"','"+request.body.pwd+"','"+request.body.email+"','"+request.body.contact+"')",function(err, result)      
-    {                                                      
-      if (err)
-         throw err;
-    });
-    response.sendFile(path.join(__dirname+'/res.html'));
-});
 
 // Start the server
 const server = app.listen(port, (error) => {

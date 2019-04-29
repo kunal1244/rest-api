@@ -2,7 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Example of Twitter Typeahead</title>
+<title>Search | REST API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script  type="text/javascript" src="js/typeahead.min.js"></script>
 <script type="text/javascript">
@@ -66,11 +75,28 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
-   <div class="page-header">
-        <h1>Ajax Search Box using Node and MySQL <small>Codeforgeek Tutorial</small></h1>
-    </div>
-    <div class="bs-example">
-        <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query">
-    </div>
+   <div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<center>
+
+			<div class="wrap-contact2">
+				<h4>Enter Email</h4>
+				<form class="contact2-form validate-form" action="http://localhost:3002/users" method="post">
+					<div class="bs-example">
+				        <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query">
+				    </div>
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn"><a href="/" style="color: white">Back to Homepage</a></button>
+						</div>
+					</div>
+				</form>
+			</div>
+			</center>
+		</div>
+	</div>
+
+    
 </body>
 </html>
