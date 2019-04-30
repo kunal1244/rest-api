@@ -14,3 +14,4 @@ phoneNo varchar(10) Not Null,
 password varchar(50) Not Null,
 
 6. Run node app.js everytime you want to run the server.
+7. Open browser and go to localhost:3002/
