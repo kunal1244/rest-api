@@ -9,10 +9,11 @@ const mysql = require('mysql');
 
 // Set database connection credentials
 const config = {
-    host: 'localhost',
-    user: 'root',
-    password: 'technothlon',
-    database: 'api',
+    host: 'db-intern.ciupl0p5utwk.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    user: 'dummyUser',
+    password: 'dummyUser01',
+    database: 'b_intern',
 };
 
 // Create a MySQL pool
